@@ -4,3 +4,23 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    background-color: #1A1A1B;
+    color: #fff;
+    font-family: 'Source Serif Pro', sans-serif;
+}
+
+button {
+    font-family: inherit;
+}
+
+.book-card {
+    width: 100px;
+    height: 100px;
+    padding: 1rem;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    color: black;
+}
