@@ -9,10 +9,12 @@ body {
     background-color: #1A1A1B;
     color: #fff;
     font-family: 'Source Serif Pro', sans-serif;
+    font-size: 1.125rem;
 }
 
 button {
     font-family: inherit;
+    font-size: inherit;
 }
 
 form {
@@ -29,17 +31,43 @@ form {
     align-self: center;
 }
 
+/* BOOK CARD STYLES */
 .book-card {
-    width: 100px;
-    height: 100px;
-    padding: 1rem;
+    width: 200px;
+    padding: 1.25rem;
+    border-radius: 12px;
     background-color: antiquewhite;
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
     color: black;
 }
 
-/* CUSTOM SWTICH BUTTON STYLES */
+.book-card h2 {
+    margin-bottom: 0.5rem;
+}
+
+.book-card p:first-of-type {
+    margin-bottom: 0.25rem;
+}
+
+.book-card img {
+    width: 24px;
+    height: 24px;
+}
+
+.book-edit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.read-status p {
+    display: inline-block;
+    margin-right: 0.3rem;
+}
+
+/* CUSTOM SWTICH BUTTON STYLES - TAKEN FROM https://www.w3schools.com/howto/howto_css_switch.asp*/
 .switch {
     position: relative;
     display: inline-block;

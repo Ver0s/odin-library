@@ -1,4 +1,4 @@
-// GET ELEMENTS FROM DOM
+// GET ELEMENTS FROM HMTL
 const bookAddForm = document.querySelector('#bookAddForm');
 const bookCardContainer = document.querySelector('.book-card-container');
 
@@ -33,8 +33,14 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 }
 
+// maybe make this function accept props when called
+function createBookCard() {
+    const bookCard = document.createElement('div');
+    bookCard.classList.add('book-card');
+}
+
 function displayBook() {
-    if (myLibrary.length === 0) return    
+    if (myLibrary.length === 0) return
 }
 
 
