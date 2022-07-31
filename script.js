@@ -25,7 +25,7 @@ function addBookToLibrary() {
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
     const pages = document.querySelector('#pages').value;
-    const read = document.querySelector('input[name="read"]:checked').value;
+    const read = document.querySelector('input[type="checkbox"]').checked;
     // https://stackoverflow.com/questions/44565816/javascript-toggle-switch-using-data
     // https://www.w3schools.com/howto/howto_css_switch.asp
 
