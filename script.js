@@ -9,8 +9,7 @@ let myLibrary = [];
 bookAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addBookToLibrary();
-    createBookCard(myLibrary[0]);
-    // displayBook();
+    displayBook();
 })
 
 // BOOK OBJECT AND METHOD CONSTRUCTOR
@@ -26,9 +25,7 @@ function addBookToLibrary() {
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
     const pages = document.querySelector('#pages').value;
-    const read = document.querySelector('input[type="checkbox"]').checked;
-    // https://stackoverflow.com/questions/44565816/javascript-toggle-switch-using-data
-    // https://www.w3schools.com/howto/howto_css_switch.asp
+    const read = document.querySelector('#setReadStatus').checked;
 
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
@@ -39,6 +36,7 @@ function createBookCard(book) {
     const bookCard = document.createElement('div');
     bookCardContainer.appendChild(bookCard);
     bookCard.classList.add('book-card');
+    bookCard.setAttribute('data-book-index', getLatestBookIndex());
 
     const bookInfo = document.createElement('div');
     bookCard.appendChild(bookInfo);
@@ -63,6 +61,7 @@ function createBookCard(book) {
     label.classList.add('switch');
     const input = document.createElement('input');
     input.setAttribute('type', 'checkbox');
+    input.checked = (document.querySelector('#setReadStatus').checked === true) ? true : false;
     const span = document.createElement('span');
     span.classList.add('slider', 'round');
     label.appendChild(input);
@@ -71,13 +70,29 @@ function createBookCard(book) {
     readStatus.appendChild(label);
     const img = document.createElement('img');
     img.setAttribute('src', 'images/delete.svg');
+    // img.setAttribute('id', 'deleteBook');
+    img.addEventListener('click', () => {
+        deleteBook(bookCard.dataset.bookIndex);
+    })
+
     bookEdit.appendChild(readStatus);
     bookEdit.appendChild(img);
     bookCard.appendChild(bookEdit);
+
 }
 
 function displayBook() {
-    if (myLibrary.length === 0) return
+    createBookCard(myLibrary[getLatestBookIndex()]);
+}
+
+function deleteBook(index) {
+    const cardToRemove = document.querySelector(`[data-book-index="${myLibrary.indexOf(myLibrary[index])}"]`);
+    bookCardContainer.removeChild(cardToRemove);
+    myLibrary.splice(index, 1);
+}
+
+function getLatestBookIndex() {
+    return (myLibrary.length-1 >= 0) ? myLibrary.length-1 : 0;
 }
 
 

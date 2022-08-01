@@ -6,8 +6,8 @@
 }
 
 body {
-    background-color: #1A1A1B;
-    color: #fff;
+    /* background-color: #1A1A1B; */
+    /* color: #fff; */
     font-family: 'Source Serif Pro', sans-serif;
     font-size: 1.125rem;
 }
@@ -32,6 +32,11 @@ form {
 }
 
 /* BOOK CARD STYLES */
+.book-card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .book-card {
     width: 200px;
     padding: 1.25rem;
@@ -54,6 +59,7 @@ form {
 .book-card img {
     width: 24px;
     height: 24px;
+    cursor: pointer;
 }
 
 .book-edit {
