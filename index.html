@@ -12,7 +12,19 @@
     <title>Odin Library</title>
 </head>
 <body>
-    <form id="bookAddForm">
+    <div class="navbar">
+        <div class="navbar-container">
+            <h2 class="logo">My Library</h2>
+            <nav>
+                <ul>
+                    <li>Total Books: </li>
+                    <li>Read Books: </li>
+                    <li>Unread Books: </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <form id="bookAddForm" class="hidden">
         <div>
             <label for="title">Title</label>
             <input type="text" id="title" required>
@@ -32,8 +44,9 @@
                 <span class="slider round"></span>
             </label>
         </div>
-        <button type="submit" id="addBook">Add Book</button>
+        <button type="submit" id="submitBtn">Add Book</button>
     </form>
-    <div class="book-card-container"></div>
+    <div class="book-card-container" class="hidden"></div>
+    <button id="addBook">Add Book<img src="images/add.svg" alt="add a book"></button>
 </body>
 </html>

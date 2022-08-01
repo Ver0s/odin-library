@@ -1,4 +1,4 @@
-/* GENERAL STYLES */
+/* GENERAL */
 * {
     margin: 0;
     padding: 0;
@@ -12,9 +12,13 @@ body {
     font-size: 1.125rem;
 }
 
+ul {
+    list-style-type: none;
+}
+
 button {
     font-family: inherit;
-    font-size: inherit;
+    cursor: pointer;
 }
 
 form {
@@ -27,11 +31,35 @@ form {
     gap: 0.5rem;
 }
 
-#addBook {
+#submitBtn {
     align-self: center;
 }
 
-/* BOOK CARD STYLES */
+.hidden {
+    display: none;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #F0A868;
+    padding: 1rem 0;
+}
+
+.navbar-container {
+    max-width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 1.5rem;
+}
+
+/* BOOK CARD */
 .book-card-container {
     display: flex;
     flex-wrap: wrap;
@@ -71,6 +99,27 @@ form {
 .read-status p {
     display: inline-block;
     margin-right: 0.3rem;
+}
+
+/* ADD BOOK BUTTON */
+#addBook {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #F0A868;
+    border: none;
+    position: absolute;
+    bottom: 3rem;
+    right: 10%;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+#addBook img {
+    height: 40px;
+    width: 40px;
 }
 
 /* CUSTOM SWTICH BUTTON STYLES - TAKEN FROM https://www.w3schools.com/howto/howto_css_switch.asp*/
