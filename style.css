@@ -6,8 +6,6 @@
 }
 
 body {
-    /* background-color: #1A1A1B; */
-    /* color: #fff; */
     font-family: 'Source Serif Pro', sans-serif;
     font-size: 1.125rem;
 }
@@ -21,22 +19,23 @@ button {
     cursor: pointer;
 }
 
+.hidden {
+    display: none;
+}
+
+/* ADD BOOK MODAL */
 form {
     display: flex;
     flex-direction: column;
     background-color: lightcoral;
     width: 300px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     padding: 1rem;
     gap: 0.5rem;
 }
 
 #submitBtn {
     align-self: center;
-}
-
-.hidden {
-    display: none;
 }
 
 /* NAVBAR */
@@ -102,7 +101,7 @@ nav ul{
 }
 
 /* ADD BOOK BUTTON */
-#addBook {
+#showModal {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -117,9 +116,9 @@ nav ul{
     font-weight: 700;
 }
 
-#addBook img {
-    height: 40px;
-    width: 40px;
+#showModal img {
+    height: 36px;
+    width: 36px;
 }
 
 /* CUSTOM SWTICH BUTTON STYLES - TAKEN FROM https://www.w3schools.com/howto/howto_css_switch.asp*/
@@ -130,14 +129,12 @@ nav ul{
     height: 20px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -176,7 +173,6 @@ input:checked + .slider:before {
     transform: translateX(20px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }
