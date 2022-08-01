@@ -9,7 +9,7 @@ let myLibrary = [];
 bookAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addBookToLibrary();
-    displayBook();
+    createBookCard(myLibrary[getLatestBookIndex()]);
 })
 
 // BOOK OBJECT AND METHOD CONSTRUCTOR
@@ -20,8 +20,12 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
+Book.prototype.toggleReadStatus = function () {
+    this.read = (this.read === true) ? false : true;
+}
+
 function addBookToLibrary() {
-    // check if same book already exists
+    // check if same book already exists - .includes() maybe
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
     const pages = document.querySelector('#pages').value;
@@ -39,50 +43,48 @@ function createBookCard(book) {
     bookCard.setAttribute('data-book-index', getLatestBookIndex());
 
     const bookInfo = document.createElement('div');
-    bookCard.appendChild(bookInfo);
-    bookInfo.classList.add('book-info');
     const h2 = document.createElement('h2');
-    h2.textContent = book.title;
     const p1 = document.createElement('p'); 
-    p1.textContent = book.author;
     const p2 = document.createElement('p'); 
+    bookInfo.classList.add('book-info');
+    h2.textContent = book.title;
+    p1.textContent = book.author;
     p2.textContent = book.pages;
+    bookCard.appendChild(bookInfo);
     bookInfo.appendChild(h2);
     bookInfo.appendChild(p1);
     bookInfo.appendChild(p2);
 
     const bookEdit = document.createElement('div');
-    bookEdit.classList.add('book-edit');
     const readStatus = document.createElement('div');
-    readStatus.classList.add('read-status');
     const p3 = document.createElement('p'); 
-    p3.textContent = 'Read:';
     const label = document.createElement('label');
-    label.classList.add('switch');
     const input = document.createElement('input');
-    input.setAttribute('type', 'checkbox');
-    input.checked = (document.querySelector('#setReadStatus').checked === true) ? true : false;
     const span = document.createElement('span');
+    const img = document.createElement('img');
+    bookEdit.classList.add('book-edit');
+    readStatus.classList.add('read-status');
+    label.classList.add('switch');
     span.classList.add('slider', 'round');
+    p3.textContent = 'Read:';
+    input.setAttribute('type', 'checkbox');
+    img.setAttribute('src', 'images/delete.svg');
+    input.checked = (document.querySelector('#setReadStatus').checked === true) ? true : false;
     label.appendChild(input);
     label.appendChild(span);
     readStatus.appendChild(p3);
     readStatus.appendChild(label);
-    const img = document.createElement('img');
-    img.setAttribute('src', 'images/delete.svg');
-    // img.setAttribute('id', 'deleteBook');
-    img.addEventListener('click', () => {
-        deleteBook(bookCard.dataset.bookIndex);
-    })
-
     bookEdit.appendChild(readStatus);
     bookEdit.appendChild(img);
     bookCard.appendChild(bookEdit);
 
-}
+    img.addEventListener('click', () => {
+        deleteBook(bookCard.dataset.bookIndex);
+    })
 
-function displayBook() {
-    createBookCard(myLibrary[getLatestBookIndex()]);
+    input.addEventListener('change', () => {
+        myLibrary[bookCard.dataset.bookIndex].toggleReadStatus();
+    });
 }
 
 function deleteBook(index) {
