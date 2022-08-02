@@ -17,9 +17,9 @@
             <h2 class="logo">My Library</h2>
             <nav>
                 <ul>
-                    <li>Total Books: </li>
-                    <li>Read Books: </li>
-                    <li>Unread Books: </li>
+                    <li id="totalBooks"></li>
+                    <li id="readBooks">Read Books: </li>
+                    <li id="unreadBooks">Unread Books: </li>
                 </ul>
             </nav>
         </div>
@@ -46,7 +46,7 @@
         </div>
         <button type="submit" id="submitBtn">Add Book</button>
     </form>
-    <div class="book-card-container" class="hidden"></div>
-    <button id="addBook">Add Book<img src="images/add.svg" alt="add a book"></button>
+    <div class="book-card-container"></div>
+    <button id="showModal">Add Book<img src="images/add.svg" alt="add a book"></button>
 </body>
 </html>

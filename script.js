@@ -1,15 +1,21 @@
 // GET ELEMENTS FROM HMTL
 const bookAddForm = document.querySelector('#bookAddForm');
 const bookCardContainer = document.querySelector('.book-card-container');
+const totalBoooks = document.querySelector('#totalBooks');
+const readBooks = document.querySelector('#readBooks');
+const unreadBooks = document.querySelector('#unreadBooks');
 
 // GLOBAL VARIABLES
 let myLibrary = [];
 
 // ATTACH EVENT LISTENERS
+window.addEventListener('load', updateBookCount);
+
 bookAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addBookToLibrary();
     createBookCard(myLibrary[getLatestBookIndex()]);
+    updateBookCount();
 })
 
 // BOOK OBJECT AND METHOD CONSTRUCTOR
@@ -78,7 +84,11 @@ function createBookCard(book) {
     bookEdit.appendChild(img);
     bookCard.appendChild(bookEdit);
 
+    // this can be separated from this function using event propagation
+    // function added to book container and then checks for tagname
     img.addEventListener('click', () => {
+        // foreach book in array update it's databookindex
+        updateIndexes();
         deleteBook(bookCard.dataset.bookIndex);
     })
 
@@ -97,4 +107,13 @@ function getLatestBookIndex() {
     return (myLibrary.length-1 >= 0) ? myLibrary.length-1 : 0;
 }
 
+function updateIndexes() {
+    const bookCards = document.querySelectorAll('.book-card');
+    bookCards.forEach((bookCard, i) => {
+        bookCard.setAttribute('data-book-index', i);
+    })
+}
 
+function updateBookCount() {
+    totalBoooks.textContent = `Total books: ${myLibrary.length}`
+}
