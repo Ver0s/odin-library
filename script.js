@@ -1,9 +1,6 @@
 // GET ELEMENTS FROM HMTL
 const bookAddForm = document.querySelector('#bookAddForm');
 const bookCardContainer = document.querySelector('.book-card-container');
-const totalBoooks = document.querySelector('#totalBooks');
-const readBooks = document.querySelector('#readBooks');
-const unreadBooks = document.querySelector('#unreadBooks');
 
 // GLOBAL VARIABLES
 let myLibrary = [];
@@ -16,6 +13,21 @@ bookAddForm.addEventListener('submit', (e) => {
     addBookToLibrary();
     createBookCard(myLibrary[getLatestBookIndex()]);
     updateBookCount();
+})
+
+bookCardContainer.addEventListener('click', e => {
+    if (e.target.tagName === 'IMG') {
+        const index = e.target.closest('.book-card').getAttribute('data-book-index');
+        deleteBook(index);
+        updateIndexes();
+        updateBookCount();
+    }
+    if (e.target.tagName === 'INPUT') {
+        const index = e.target.closest('.book-card').getAttribute('data-book-index');
+        updateIndexes();
+        myLibrary[index].toggleReadStatus();
+        updateBookCount();
+    }
 })
 
 // BOOK OBJECT AND METHOD CONSTRUCTOR
@@ -83,18 +95,6 @@ function createBookCard(book) {
     bookEdit.appendChild(readStatus);
     bookEdit.appendChild(img);
     bookCard.appendChild(bookEdit);
-
-    // this can be separated from this function using event propagation
-    // function added to book container and then checks for tagname
-    img.addEventListener('click', () => {
-        // foreach book in array update it's databookindex
-        updateIndexes();
-        deleteBook(bookCard.dataset.bookIndex);
-    })
-
-    input.addEventListener('change', () => {
-        myLibrary[bookCard.dataset.bookIndex].toggleReadStatus();
-    });
 }
 
 function deleteBook(index) {
@@ -115,5 +115,13 @@ function updateIndexes() {
 }
 
 function updateBookCount() {
-    totalBoooks.textContent = `Total books: ${myLibrary.length}`
+    const totalBoooks = document.querySelector('#totalBooks');
+    const readBooks = document.querySelector('#readBooks');
+    const unreadBooks = document.querySelector('#unreadBooks');
+    let totalBooksCount = myLibrary.length;
+    let readBooksCount = myLibrary.filter(book => book.read === true).length;
+
+    totalBoooks.textContent = `Total books: ${totalBooksCount}`;
+    readBooks.textContent = `Read books: ${readBooksCount}`;
+    unreadBooks.textContent = `Unread books: ${totalBooksCount - readBooksCount}`;
 }
