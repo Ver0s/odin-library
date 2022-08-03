@@ -5,25 +5,26 @@ const bookAddFormModal = document.querySelector('#bookAddFormModal');
 const showModalBtn = document.querySelector('#showModal');
 const closeModalBtn = document.querySelector('#closeModal');
 
-
 // GLOBAL VARIABLES
 let myLibrary = [];
+// bookCardContainer.textContent = 'It seems that you don\'t have any books yet.';
 
 // ATTACH EVENT LISTENERS
 window.addEventListener('load', updateBookCount);
 
 window.addEventListener('click', outsideClick);
 
-showModalBtn.addEventListener('click', showModal)
+showModalBtn.addEventListener('click', showModal);
 
-closeModalBtn.addEventListener('click', closeModal)
+closeModalBtn.addEventListener('click', closeModal);
 
 bookAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addBookToLibrary();
     createBookCard(myLibrary[getLatestBookIndex()]);
     updateBookCount();
-    bookAddFormModal.style.display = 'none';
+    closeModal();
+    bookAddForm.reset();
 })
 
 bookCardContainer.addEventListener('click', e => {
@@ -54,7 +55,6 @@ Book.prototype.toggleReadStatus = function () {
 }
 
 function addBookToLibrary() {
-    // check if same book already exists - .includes() maybe
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
     const pages = document.querySelector('#pages').value;
@@ -64,7 +64,6 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 }
 
-// maybe make this function accept props when called
 function createBookCard(book) {
     const bookCard = document.createElement('div');
     bookCardContainer.appendChild(bookCard);
