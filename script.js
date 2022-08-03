@@ -1,6 +1,10 @@
 // GET ELEMENTS FROM HMTL
 const bookAddForm = document.querySelector('#bookAddForm');
 const bookCardContainer = document.querySelector('.book-card-container');
+const bookAddFormModal = document.querySelector('#bookAddFormModal');
+const showModalBtn = document.querySelector('#showModal');
+const closeModalBtn = document.querySelector('#closeModal');
+
 
 // GLOBAL VARIABLES
 let myLibrary = [];
@@ -8,11 +12,18 @@ let myLibrary = [];
 // ATTACH EVENT LISTENERS
 window.addEventListener('load', updateBookCount);
 
+window.addEventListener('click', outsideClick);
+
+showModalBtn.addEventListener('click', showModal)
+
+closeModalBtn.addEventListener('click', closeModal)
+
 bookAddForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addBookToLibrary();
     createBookCard(myLibrary[getLatestBookIndex()]);
     updateBookCount();
+    bookAddFormModal.style.display = 'none';
 })
 
 bookCardContainer.addEventListener('click', e => {
@@ -124,4 +135,18 @@ function updateBookCount() {
     totalBoooks.textContent = `Total books: ${totalBooksCount}`;
     readBooks.textContent = `Read books: ${readBooksCount}`;
     unreadBooks.textContent = `Unread books: ${totalBooksCount - readBooksCount}`;
+}
+
+function closeModal() {
+    bookAddFormModal.style.display = 'none';
+}
+
+function showModal() {
+    bookAddFormModal.style.display = 'block';
+}
+
+function outsideClick(e) {
+    if (e.target === bookAddFormModal) {
+        bookAddFormModal.style.display = 'none';
+    }
 }

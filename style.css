@@ -20,12 +20,25 @@ button {
 }
 
 /* ADD BOOK MODAL */
+#bookAddFormModal {
+    display: none;
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 #bookAddForm {
     display: flex;
     flex-direction: column;
     background-color: lightcoral;
-    width: 300px;
-    margin: 0 auto;
+    width: 20%;
+    /* width: clamp(); */
+    margin: 20% auto;
     padding: 1rem;
     gap: 0.5rem;
 }
@@ -35,6 +48,16 @@ button {
     align-items: center;
     gap: 0.5rem;
 } */
+#closeModal {
+    align-self: flex-end;
+    padding: 0.15rem 0.5rem;
+    cursor: pointer;
+}
+
+#closeModal:hover {
+    border-radius: 0.5rem;
+    background-color: rgb(229, 83, 83);
+}
 
 #submitBtn {
     align-self: center;
