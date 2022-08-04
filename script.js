@@ -7,10 +7,12 @@ const closeModalBtn = document.querySelector('#closeModal');
 
 // GLOBAL VARIABLES
 let myLibrary = [];
-// bookCardContainer.textContent = 'It seems that you don\'t have any books yet.';
 
 // ATTACH EVENT LISTENERS
-window.addEventListener('load', updateBookCount);
+window.addEventListener('load', () => {
+    updateBookCount();
+    emptyStateMessage();
+});
 
 window.addEventListener('click', outsideClick);
 
@@ -24,6 +26,7 @@ bookAddForm.addEventListener('submit', (e) => {
     createBookCard(myLibrary[getLatestBookIndex()]);
     updateBookCount();
     closeModal();
+    emptyStateMessage();
     bookAddForm.reset();
 })
 
@@ -76,8 +79,8 @@ function createBookCard(book) {
     const p2 = document.createElement('p'); 
     bookInfo.classList.add('book-info');
     h2.textContent = book.title;
-    p1.textContent = book.author;
-    p2.textContent = book.pages;
+    p1.textContent = `by ${book.author}`;
+    p2.textContent = `${book.pages} pages`;
     bookCard.appendChild(bookInfo);
     bookInfo.appendChild(h2);
     bookInfo.appendChild(p1);
@@ -147,5 +150,15 @@ function showModal() {
 function outsideClick(e) {
     if (e.target === bookAddFormModal) {
         bookAddFormModal.style.display = 'none';
+    }
+}
+
+function emptyStateMessage() {
+    if (myLibrary.length === 0) {
+        const message = document.createElement('p');
+        message.textContent = 'It seems that you don\'t have any books yet.';
+        bookCardContainer.appendChild(message);
+    } else {
+        bookCardContainer.removeChild(bookCardContainer.firstChild);
     }
 }
