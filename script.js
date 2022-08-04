@@ -36,6 +36,7 @@ bookCardContainer.addEventListener('click', e => {
         deleteBook(index);
         updateIndexes();
         updateBookCount();
+        emptyStateMessage();
     }
     if (e.target.tagName === 'INPUT') {
         const index = e.target.closest('.book-card').getAttribute('data-book-index');
@@ -153,12 +154,13 @@ function outsideClick(e) {
     }
 }
 
-function emptyStateMessage() {
+function emptyStateMessage() { 
+    const message = document.createElement('p');
+    message.textContent = 'You currently have no books in your library.';
+    message.setAttribute('id', 'emptyMessage')
     if (myLibrary.length === 0) {
-        const message = document.createElement('p');
-        message.textContent = 'It seems that you don\'t have any books yet.';
         bookCardContainer.appendChild(message);
-    } else {
-        bookCardContainer.removeChild(bookCardContainer.firstChild);
+    } else if ((myLibrary.length > 0) && (bookCardContainer.firstChild.tagName === "P")){
+        bookCardContainer.removeChild(document.querySelector('#emptyMessage'));
     }
 }
