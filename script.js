@@ -46,17 +46,19 @@ bookCardContainer.addEventListener('click', e => {
     }
 })
 
-// BOOK OBJECT AND METHOD CONSTRUCTOR
-function Book(title, author, pages, read) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.read = read
+    }
+
+    toggleReadStatus() {
+        this.read = (this.read === true) ? false : true;
+    }
 }
 
-Book.prototype.toggleReadStatus = function () {
-    this.read = (this.read === true) ? false : true;
-}
 
 function addBookToLibrary() {
     const title = document.querySelector('#title').value;
